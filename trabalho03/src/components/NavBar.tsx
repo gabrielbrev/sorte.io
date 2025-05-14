@@ -42,9 +42,9 @@ export function NavBar() {
 		>
 			<div className="container">
 				<Link className="navbar-brand text-light" to="/">
-					<div className="d-flex flex-row align-items-center justify-content-center gap-1">
-						<img src="../../public/icon.png" alt="sorte.io" height={40} />
-						<span className="fs-3">Sorte.io</span>
+					<div className="d-flex flex-row align-items-center justify-content-center">
+						<img src="../../public/icon.png" alt="sorte.io" height={30} />
+						<span>Sorte.io</span>
 					</div>
 				</Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
