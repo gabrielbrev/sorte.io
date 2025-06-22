@@ -1,0 +1,16 @@
+package com.sorte.io.apirestful.dto.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class JoinGiveawayRequest {
+    private String userId;
+    private String giveawayId;
+    private int numEntries;
+}
