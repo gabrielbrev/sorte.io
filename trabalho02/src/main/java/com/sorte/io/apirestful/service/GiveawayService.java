@@ -1,5 +1,7 @@
 package com.sorte.io.apirestful.service;
 
+import com.sorte.io.apirestful.dto.request.JoinGiveawaysRequest;
+import com.sorte.io.apirestful.dto.response.JoinGiveawaysResponse;
 import com.sorte.io.apirestful.model.Entry;
 import com.sorte.io.apirestful.model.Giveaway;
 import com.sorte.io.apirestful.model.User;
@@ -30,75 +32,97 @@ public class GiveawayService {
     }
 
     public Giveaway findById(String id) {
-        Optional<Giveaway> giveaway = giveawayRepository.findById(id);
-
-        if (giveaway.isEmpty()) {
-            throw new RuntimeException("Giveaway not found");
-        }
-
-        return giveaway.get();
+        return giveawayRepository.findById(id).orElseThrow(() -> new RuntimeException("Giveaway not found"));
     }
 
     public List<Giveaway> findByTitle(String title) {
         return giveawayRepository.findByTitle(title);
     }
 
+    public List<Giveaway> findEndedGiveaways() {
+        return giveawayRepository.findEndedGiveaways();
+    }
+
     public void createGiveaway(Giveaway giveaway) {
         giveawayRepository.save(giveaway);
     }
 
-    public List<Integer> joinGiveaway(String giveawayId, String userId, int num) {
-        List<Entry> entries = entryRepository.findGiveawayEntries(giveawayId);
+    public Giveaway updateGiveaway(Giveaway giveaway) {
+        Optional<Giveaway> optionalGiveaway = giveawayRepository.findById(giveaway.getId());
+        if (optionalGiveaway.isPresent()) {
+            Giveaway g = optionalGiveaway.get();
 
-        Optional<Giveaway> optionalGiveaway = giveawayRepository.findById(giveawayId);
-        if (optionalGiveaway.isEmpty()) {
-            throw new RuntimeException("Giveaway not found");
+            if (g.getWinner() != null) {
+                throw new RuntimeException("Giveaway has ended");
+            }
+
+            giveaway.setOwner(g.getOwner());
+            return giveawayRepository.save(giveaway);
         }
 
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isEmpty()) {
-            throw new RuntimeException("User not found");
-        }
+        throw new RuntimeException("Giveaway not found");
+    }
 
-        Giveaway giveaway = optionalGiveaway.get();
-        User user = optionalUser.get();
+    public void deleteGiveaway(String id) {
+        giveawayRepository.deleteById(id);
+    }
 
-        List<Integer> existingEntries = new ArrayList<>();
-        for (Entry entry : entries) {
-            existingEntries.add(entry.getLuckyNumber());
-        }
-
-        List<Integer> generatedNumbers = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            int randomNumber;
-            do {
-                randomNumber = ThreadLocalRandom.current().nextInt(1, giveaway.getNumEntries() + 1);
-            } while (generatedNumbers.contains(randomNumber) || existingEntries.contains(randomNumber));
-            generatedNumbers.add(randomNumber);
-        }
-
+    public JoinGiveawaysResponse joinGiveaway(JoinGiveawaysRequest data) {
+        User user = userRepository.findById(data.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         List<Entry> newEntries = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            newEntries.add(new Entry(giveaway, user, generatedNumbers.get(i)));
+
+        JoinGiveawaysResponse response = new JoinGiveawaysResponse();
+        List<JoinGiveawaysResponse.Item> responseItems = new ArrayList<>();
+
+        for (JoinGiveawaysRequest.Item item : data.getItems()) {
+            String giveawayId = item.getGiveawayId();
+            int num = item.getNumEntries();
+
+            Giveaway giveaway = giveawayRepository.findById(giveawayId).orElseThrow(() -> new RuntimeException("Giveaway not found"));
+            List<Entry> entries = entryRepository.findGiveawayEntries(giveawayId);
+
+            List<Integer> existingEntries = new ArrayList<>();
+            for (Entry entry : entries) {
+                existingEntries.add(entry.getLuckyNumber());
+            }
+
+            List<Integer> generatedNumbers = new ArrayList<>();
+            for (int i = 0; i < num; i++) {
+                int randomNumber;
+                do {
+                    randomNumber = ThreadLocalRandom.current().nextInt(1, giveaway.getNumEntries() + 1);
+                } while (generatedNumbers.contains(randomNumber) || existingEntries.contains(randomNumber));
+                generatedNumbers.add(randomNumber);
+            }
+
+            for (int i = 0; i < num; i++) {
+                newEntries.add(new Entry(giveaway, user, generatedNumbers.get(i)));
+            }
+
+            JoinGiveawaysResponse.Item responseItem = new JoinGiveawaysResponse.Item();
+            responseItem.setGiveawayId(giveawayId);
+            responseItem.setLuckyNumbers(generatedNumbers);
+            responseItems.add(responseItem);
         }
 
         entryRepository.saveAll(newEntries);
+        response.setItems(responseItems);
 
-        return generatedNumbers;
+        return response;
     }
 
     public Giveaway generateWinningNumber(String giveawayId) {
-        Optional<Giveaway> optionalGiveaway = giveawayRepository.findById(giveawayId);
-        if (optionalGiveaway.isEmpty()) throw new RuntimeException("Giveaway not found");
-        Giveaway giveaway = optionalGiveaway.get();
+        Giveaway giveaway = giveawayRepository.findById(giveawayId).orElseThrow(() -> new RuntimeException("Giveaway not found"));
 
         List<Entry> entries = entryRepository.findGiveawayEntries(giveawayId);
         int randomNumber = ThreadLocalRandom.current().nextInt(0, entries.size());
         Entry winningEntry = entries.get(randomNumber);
 
         giveaway.setWinner(winningEntry.getUser());
+        giveaway.setLuckyNumber(winningEntry.getLuckyNumber());
         giveawayRepository.save(giveaway);
 
         return giveaway;
     }
 }
+

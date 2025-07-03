@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface EntryRepository extends JpaRepository<Entry, String> {
-    @Query("SELECT e FROM Entry e JOIN FETCH e.luckyNumber WHERE e.giveaway.id = :giveawayId")
+    @Query("SELECT e FROM Entry e WHERE e.giveaway.id = :giveawayId")
     List<Entry> findGiveawayEntries(@Param("giveawayId") String giveawayId);
 }

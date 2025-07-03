@@ -12,4 +12,10 @@ import java.util.List;
 public interface GiveawayRepository extends JpaRepository<Giveaway, String> {
     @Query("SELECT g FROM Giveaway g WHERE g.title LIKE %:title%")
     List<Giveaway> findByTitle(@Param("title") String title);
+
+    @Query("SELECT g FROM Giveaway g WHERE g.winner IS NULL")
+    List<Giveaway> findRunningGiveaways();
+
+    @Query("SELECT g FROM Giveaway g WHERE g.winner IS NOT NULL")
+    List<Giveaway> findEndedGiveaways();
 }

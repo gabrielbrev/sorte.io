@@ -1,5 +1,7 @@
 package com.sorte.io.apirestful.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,20 +15,22 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"user", "giveaway"})
 @Entity
 public class Entry {
-    @EmbeddedId
-    private EntryId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonIgnore
+    private String id;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(name = "user_id")
+    @JsonBackReference("user-entry")
     private User user;
 
     @ManyToOne
-    @MapsId("giveawayId")
     @JoinColumn(name = "giveaway_id")
+    @JsonBackReference("giveaway-entry")
     private Giveaway giveaway;
 
     private int luckyNumber;
@@ -38,7 +42,8 @@ public class Entry {
     private LocalDateTime updatedAt;
 
     public Entry(Giveaway giveaway, User user, int luckyNumber) {
-        this.id = new EntryId(giveaway.getId(), user.getId());
         this.luckyNumber = luckyNumber;
+        this.user = user;
+        this.giveaway = giveaway;
     }
 }

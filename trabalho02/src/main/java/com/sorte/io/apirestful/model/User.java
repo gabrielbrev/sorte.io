@@ -1,7 +1,8 @@
 package com.sorte.io.apirestful.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -10,7 +11,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -29,15 +34,15 @@ public class User {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "owner")
-    @JsonManagedReference("user-owner")
+    @JsonIgnoreProperties({"owner", "winner", "entries"})
     private List<Giveaway> ownedGiveaways;
 
     @OneToMany(mappedBy = "winner")
-    @JsonManagedReference("user-winner")
+    @JsonIgnoreProperties({"owner", "winner", "entries"})
     private List<Giveaway> wonGiveaways;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user-entry")
+    @JsonIgnore
     private List<Entry> entries;
 
     @CreationTimestamp
@@ -45,4 +50,15 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @JsonIgnoreProperties({"owner", "winner", "entries"})
+    public List<Giveaway> getParticipatingGiveaways() {
+        Map<String, Giveaway> giveaways = new HashMap<>();
+        for (Entry entry : entries) {
+            Giveaway giveaway = entry.getGiveaway();
+            giveaways.put(giveaway.getId(), giveaway);
+        }
+
+        return new ArrayList<>(giveaways.values());
+    }
 }
