@@ -11,13 +11,11 @@ export interface Giveaway {
 		id: string;
 		name: string;
 		email: string;
-		phoneNumber?: string;
 	};
 	winner?: {
 		id: string;
 		name: string;
 		email: string;
-		phoneNumber?: string;
 	};
 	luckyNumber?: number;
 	entries: Entry[];

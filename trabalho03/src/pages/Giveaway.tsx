@@ -16,7 +16,8 @@ export default function Giveaway() {
 		entryCount: 1,
 	});
 	const [serverError, setServerError] = useState("");
-	const user = isLogged();
+	const loggedUser = isLogged();
+	const { id: userId } = loggedUser || {};
 
 	const { data: giveaway, isLoading, error: fetchError } = useFindGiveaway(id || "");
 
@@ -24,7 +25,7 @@ export default function Giveaway() {
 	const totalEntries = giveaway?.numEntries || 0;
 	const availableEntries = totalEntries - soldEntries;
 	const hasWinner = !!giveaway?.winner;
-	const isCurrentUserWinner = hasWinner && user && giveaway?.winner?.id === user.id;
+	const isCurrentUserWinner = hasWinner && userId && giveaway?.winner?.id === userId;
 
 	// Cria um schema dinâmico com base nas entradas disponíveis
 	const joinSchema = createJoinGiveawaySchemaWithAvailableEntries(availableEntries);
@@ -180,11 +181,6 @@ export default function Giveaway() {
 									<p className="mb-1">
 										<strong>Email:</strong> {giveaway.winner?.email}
 									</p>
-									{giveaway.winner?.phoneNumber && (
-										<p className="mb-1">
-											<strong>Telefone:</strong> {giveaway.winner.phoneNumber}
-										</p>
-									)}
 								</div>
 								<div className="col-md-4 text-end">
 									{giveaway.luckyNumber && (
@@ -252,7 +248,7 @@ export default function Giveaway() {
 							</button>
 						</div>
 
-						{!user && !hasWinner && (
+						{!userId && !hasWinner && (
 							<div className="text-info mt-2">
 								<small>
 									<i className="bi bi-info-circle me-1"></i>
@@ -276,7 +272,7 @@ export default function Giveaway() {
 							</div>
 						)}
 
-						{user && availableEntries > 0 && !hasWinner && (
+						{userId && availableEntries > 0 && !hasWinner && (
 							<div className="text-info mt-2">
 								<small>Total: R$ {(formData.entryCount * giveaway.entryPrice).toFixed(2)}</small>
 							</div>

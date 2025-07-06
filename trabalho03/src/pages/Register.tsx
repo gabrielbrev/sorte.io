@@ -9,7 +9,7 @@ export default function Register() {
 		name: "",
 		email: "",
 		password: "",
-		phoneNumber: "",
+		confirmPassword: "",
 	});
 	const [serverError, setServerError] = useState("");
 	const navigate = useNavigate();
@@ -21,7 +21,8 @@ export default function Register() {
 			setServerError("");
 
 			try {
-				await registerMutation.mutateAsync(data);
+				const { confirmPassword, ...registerData } = data;
+				await registerMutation.mutateAsync(registerData);
 				navigate("/login", { replace: true });
 			} catch (err: any) {
 				setServerError(err?.message || "Erro ao cadastrar. Tente novamente.");
@@ -38,20 +39,6 @@ export default function Register() {
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		handleSubmit(formData);
-	};
-
-	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		let value = e.target.value.replace(/\D/g, ""); // Remove não-dígitos
-
-		// Formata para (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
-		if (value.length <= 11) {
-			value = value.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3");
-			value = value.replace(/^(\d{2})(\d{1,5})$/, "($1) $2");
-			value = value.replace(/^(\d{1,2})$/, "($1");
-		}
-
-		setFormData((prev) => ({ ...prev, phoneNumber: value }));
-		setServerError("");
 	};
 
 	return (
@@ -113,23 +100,21 @@ export default function Register() {
 							{errors.password && <div className="invalid-feedback">{errors.password}</div>}
 						</div>
 						<div className="mb-3">
-							<label htmlFor="phoneNumber" className="form-label">
-								Telefone
+							<label htmlFor="confirmPassword" className="form-label">
+								Confirmar Senha
 							</label>
 							<input
-								type="tel"
+								type="password"
 								className={`form-control bg-dark text-light border-secondary ${
-									errors.phoneNumber ? "is-invalid" : ""
+									errors.confirmPassword ? "is-invalid" : ""
 								}`}
-								id="phoneNumber"
-								name="phoneNumber"
-								value={formData.phoneNumber}
-								onChange={handlePhoneChange}
-								placeholder="(11) 99999-9999"
-								maxLength={15}
+								id="confirmPassword"
+								name="confirmPassword"
+								value={formData.confirmPassword}
+								onChange={handleInputChange}
 								required
 							/>
-							{errors.phoneNumber && <div className="invalid-feedback">{errors.phoneNumber}</div>}
+							{errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
 						</div>
 						{serverError && <div className="alert alert-danger py-2">{serverError}</div>}
 						<button

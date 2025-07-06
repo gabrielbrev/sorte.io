@@ -4,7 +4,6 @@ export interface Entry {
 		id: string;
 		name: string;
 		email: string;
-		phoneNumber?: string;
 	};
 	giveaway: {
 		id: string;

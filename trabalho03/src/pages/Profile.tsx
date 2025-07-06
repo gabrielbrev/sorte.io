@@ -6,17 +6,16 @@ import { isLogged } from "../lib/isLogged";
 
 export default function Profile() {
 	const findUserMutation = useFindUser();
-	const userId = isLogged()?.id;
+	const loggedUser = isLogged();
+	const { id: userId } = loggedUser || {};
 	const [user, setUser] = useState<User>();
 
 	useEffect(() => {
 		async function findUser() {
-			console.log("oi");
 			if (!userId) return;
 
 			try {
 				const user = await findUserMutation.mutateAsync({ id: userId });
-				console.log(user);
 				setUser(user);
 			} catch {
 				// TODO: Redirecionar para página de erro
@@ -41,8 +40,6 @@ export default function Profile() {
 						{user.email}
 						<br />
 						{user.name}
-						<br />
-						{user.phoneNumber}
 					</p>
 				</div>
 			</div>

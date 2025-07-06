@@ -10,7 +10,8 @@ export default function ShoppingCart() {
 	const [cart, setCart] = useState<Cart>({ items: [], totalAmount: 0 });
 	const [isProcessing, setIsProcessing] = useState(false);
 	const joinGiveawayMutation = useJoinGiveaway();
-	const user = isLogged();
+	const loggedUser = isLogged();
+	const { id: userId } = loggedUser || {};
 
 	useEffect(() => {
 		setCart(getCartFromStorage());
@@ -31,7 +32,7 @@ export default function ShoppingCart() {
 
 		try {
 			const joinRequest: JoinGiveawayRequest = {
-				userId: user!.id,
+				userId: userId!,
 				items: cart.items.map((item) => ({
 					giveawayId: item.giveawayId,
 					numEntries: item.entryCount,

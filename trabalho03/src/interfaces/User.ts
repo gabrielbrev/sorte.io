@@ -6,7 +6,6 @@ export interface User {
 	name: string;
 	email: string;
 	password: string;
-	phoneNumber: string;
 	ownedGiveaways: Giveaway[];
 	wonGiveaways: Giveaway[];
 	entries: Entry[];

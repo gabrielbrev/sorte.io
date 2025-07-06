@@ -25,7 +25,7 @@ async function handleLogin(payload: LoginRequest) {
 
 		const data = (await response.json()) as LoginResponse;
 
-		Cookies.set("session", JSON.stringify(data.user));
+		Cookies.set("session", JSON.stringify({ id: data.user.id }));
 
 		return data.user;
 	} catch (err) {

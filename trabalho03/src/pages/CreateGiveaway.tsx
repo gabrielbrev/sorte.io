@@ -15,7 +15,8 @@ export default function CreateGiveaway() {
 	});
 	const [serverError, setServerError] = useState("");
 	const navigate = useNavigate();
-	const user = isLogged();
+	const loggedUser = isLogged();
+	const { id: userId } = loggedUser || {};
 	const createGiveawayMutation = useCreateGiveaway();
 
 	const { errors, handleSubmit } = useFormValidation({
@@ -23,7 +24,7 @@ export default function CreateGiveaway() {
 		onSubmit: async (data: CreateGiveawayFormData) => {
 			setServerError("");
 
-			if (!user) {
+			if (!userId) {
 				setServerError("Você precisa estar logado para criar um sorteio.");
 				return;
 			}
@@ -32,7 +33,7 @@ export default function CreateGiveaway() {
 				const giveawayPayload = {
 					...data,
 					owner: {
-						id: user.id,
+						id: userId,
 					},
 				};
 

@@ -12,7 +12,8 @@ export default function ManageGiveaway() {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	const id = searchParams.get("id");
-	const user = isLogged();
+	const loggedUser = isLogged();
+	const { id: userId } = loggedUser || {};
 
 	const [isEditing, setIsEditing] = useState(false);
 	const [formData, setFormData] = useState<UpdateGiveawayFormData>({
@@ -70,7 +71,7 @@ export default function ManageGiveaway() {
 		return <div className="alert alert-danger">ID do sorteio não fornecido</div>;
 	}
 
-	if (!user) {
+	if (!userId) {
 		return <div className="alert alert-danger">Você precisa estar logado para acessar esta página</div>;
 	}
 

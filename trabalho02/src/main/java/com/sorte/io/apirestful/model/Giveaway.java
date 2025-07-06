@@ -53,4 +53,13 @@ public class Giveaway {
     private LocalDateTime updatedAt;
 
     public int getSoldEntries() { return entries == null ? 0 : entries.size(); }
+
+    public Giveaway(String title, String description, double entryPrice, int numEntries, String imageUrl, User owner) {
+        this.title = title;
+        this.description = description;
+        this.entryPrice = entryPrice;
+        this.numEntries = numEntries;
+        this.owner = owner;
+        this.imageUrl = imageUrl;
+    }
 }

@@ -29,9 +29,9 @@ public class User {
     private String id;
     private String name;
     @Email
+    @Column(unique = true)
     private String email;
     private String password;
-    private String phoneNumber;
 
     @OneToMany(mappedBy = "owner")
     @JsonIgnoreProperties({"owner", "winner", "entries"})
@@ -60,5 +60,11 @@ public class User {
         }
 
         return new ArrayList<>(giveaways.values());
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 }
