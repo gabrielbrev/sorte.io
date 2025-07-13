@@ -1,31 +1,29 @@
 import { Link } from "react-router-dom";
 import { useFindUser } from "../hooks/user/useFindUser";
-import { useEffect, useState } from "react";
-import type { User } from "../interfaces/User";
 import { isLogged } from "../lib/isLogged";
 
 export default function Profile() {
-	const findUserMutation = useFindUser();
 	const loggedUser = isLogged();
 	const { id: userId } = loggedUser || {};
-	const [user, setUser] = useState<User>();
+	const { data: user, isLoading, error } = useFindUser(userId || "");
 
-	useEffect(() => {
-		async function findUser() {
-			if (!userId) return;
+	if (isLoading) {
+		return (
+			<div className="d-flex justify-content-center align-items-center" style={{ minHeight: "50vh" }}>
+				<div className="spinner-border text-primary" role="status">
+					<span className="visually-hidden">Carregando...</span>
+				</div>
+			</div>
+		);
+	}
 
-			try {
-				const user = await findUserMutation.mutateAsync({ id: userId });
-				setUser(user);
-			} catch {
-				// TODO: Redirecionar para página de erro
-			}
-		}
-
-		findUser();
-	}, []);
-
-	if (!user) return null; // TODO: Retornar loading page
+	if (error || !user) {
+		return (
+			<div className="alert alert-danger" role="alert">
+				Erro ao carregar perfil: {error?.message || "Usuário não encontrado"}
+			</div>
+		);
+	}
 
 	const owned = user.ownedGiveaways;
 
@@ -44,7 +42,6 @@ export default function Profile() {
 				</div>
 			</div>
 
-			{/* Seção Sorteios Participando */}
 			{user.participatingGiveaways && user.participatingGiveaways.length > 0 && (
 				<>
 					<h3 className="mb-3">Sorteios Participando</h3>
@@ -68,7 +65,6 @@ export default function Profile() {
 				</>
 			)}
 
-			{/* Seção Sorteios Ganhos */}
 			{user.wonGiveaways && user.wonGiveaways.length > 0 && (
 				<>
 					<h3 className="mb-3">

@@ -6,6 +6,7 @@ import com.sorte.io.apirestful.model.Giveaway;
 import com.sorte.io.apirestful.service.GiveawayService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class GiveawayController {
     @GetMapping("/find")
     public Giveaway findById(@RequestParam("id") String id) {
         return giveawayService.findById(id);
+    }
+
+    @GetMapping("/find-active")
+    public Page<Giveaway> findActiveGiveaways(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return giveawayService.findActiveGiveaways(page, size);
     }
 
     @GetMapping("/find-ended")
