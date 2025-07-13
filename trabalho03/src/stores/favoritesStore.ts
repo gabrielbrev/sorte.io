@@ -71,16 +71,23 @@ const createFavoritesStore = (userId?: string) => {
 	);
 };
 
-// Store instances cache
 const favoritesStoreInstances = new Map<string, ReturnType<typeof createFavoritesStore>>();
+
+// Create a default store for non-logged users
+const guestStore = createFavoritesStore();
 
 export const useFavoritesStore = () => {
 	const user = isLogged();
-	const userId = user?.id || "guest";
 
-	if (!favoritesStoreInstances.has(userId)) {
-		favoritesStoreInstances.set(userId, createFavoritesStore(user?.id));
+	if (!user) {
+		return guestStore;
 	}
 
-	return favoritesStoreInstances.get(userId)!();
+	const userId = user.id;
+
+	if (!favoritesStoreInstances.has(userId)) {
+		favoritesStoreInstances.set(userId, createFavoritesStore(user.id));
+	}
+
+	return favoritesStoreInstances.get(userId)!;
 };

@@ -11,6 +11,7 @@ import ManageGiveaway from "../pages/ManageGiveaway";
 import ShoppingCart from "../pages/ShoppingCart";
 import Favorites from "../pages/Favorites";
 import { PrivateRoutes } from "./PrivateRoutes";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
 	{
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
 			{ path: "login", element: <Login /> },
 			{ path: "register", element: <Register /> },
 		],
+		errorElement: <Error />,
 	},
 	{
 		path: "/",
@@ -34,6 +36,7 @@ const router = createBrowserRouter([
 			{ path: "cart", element: <ShoppingCart /> },
 			{ path: "favorites", element: <Favorites /> },
 		],
+		errorElement: <Error />,
 	},
 ]);
 export default router;

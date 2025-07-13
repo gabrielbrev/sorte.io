@@ -11,11 +11,13 @@ interface GiveawayCardProps {
 }
 
 export function GiveawayCard({ id, imageUrl, title, description, entryPrice, createdAt }: GiveawayCardProps) {
-	const { isFavorite, toggleFavorite, createFavoriteFromGiveaway } = useFavorites();
+	const { isFavorite, toggleFavorite, createFavoriteFromGiveaway, isLoggedIn } = useFavorites();
 	const isItemFavorite = isFavorite(id);
 
 	const handleToggleFavorite = (e: React.MouseEvent) => {
 		e.preventDefault();
+		if (!isLoggedIn) return;
+
 		const favoriteItem = createFavoriteFromGiveaway({
 			id,
 			title,
@@ -49,14 +51,16 @@ export function GiveawayCard({ id, imageUrl, title, description, entryPrice, cre
 							Criado em {new Date(createdAt).toLocaleDateString("pt-BR")}
 						</small>
 					</p>
-					<a
-						href="#"
-						onClick={handleToggleFavorite}
-						className="text-danger"
-						style={{ textDecoration: "none", fontSize: "1.5rem" }}
-					>
-						<i className={isItemFavorite ? "bi bi-heart-fill" : "bi bi-heart"}></i>
-					</a>
+					{isLoggedIn && (
+						<a
+							href="#"
+							onClick={handleToggleFavorite}
+							className="text-danger"
+							style={{ textDecoration: "none", fontSize: "1.5rem" }}
+						>
+							<i className={isItemFavorite ? "bi bi-heart-fill" : "bi bi-heart"}></i>
+						</a>
+					)}
 				</div>
 			</div>
 		</div>
