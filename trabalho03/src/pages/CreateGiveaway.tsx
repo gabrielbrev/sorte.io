@@ -212,7 +212,10 @@ export default function CreateGiveaway() {
 												Criando...
 											</>
 										) : (
-											"Criar Sorteio"
+											<>
+												<i className="bi bi-plus-circle me-2"></i>
+												Criar Sorteio
+											</>
 										)}
 									</button>
 									<button
@@ -221,6 +224,7 @@ export default function CreateGiveaway() {
 										onClick={() => navigate("/profile")}
 										disabled={createGiveawayMutation.isPending}
 									>
+										<i className="bi bi-x-circle me-2"></i>
 										Cancelar
 									</button>
 								</div>

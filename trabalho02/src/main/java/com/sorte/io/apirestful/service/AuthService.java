@@ -13,9 +13,6 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public User login(String email, String password) {
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(email, password);
 

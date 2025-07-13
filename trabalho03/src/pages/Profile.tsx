@@ -71,7 +71,10 @@ export default function Profile() {
 			{/* Seção Sorteios Ganhos */}
 			{user.wonGiveaways && user.wonGiveaways.length > 0 && (
 				<>
-					<h3 className="mb-3">Sorteios Ganhos 🏆</h3>
+					<h3 className="mb-3">
+						<i className="bi bi-trophy-fill text-warning me-2"></i>
+						Sorteios Ganhos
+					</h3>
 					<ul className="list-group mb-4">
 						{user.wonGiveaways.map((g) => (
 							<li

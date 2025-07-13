@@ -1,30 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getCartFromStorage, removeItemFromCart, updateItemQuantity, clearCart } from "../utils/cart";
+import { useCart } from "../hooks/useCart";
 import { useJoinGiveaway, type JoinGiveawayRequest } from "../hooks/giveaway/useJoinGiveaway";
 import { isLogged } from "../lib/isLogged";
-import type { Cart } from "../interfaces/CartItem";
 import Toast from "bootstrap/js/dist/toast";
 
 export default function ShoppingCart() {
-	const [cart, setCart] = useState<Cart>({ items: [], totalAmount: 0 });
 	const [isProcessing, setIsProcessing] = useState(false);
+	const { items, totalAmount, removeItem, updateItemQuantity, clearCart } = useCart();
 	const joinGiveawayMutation = useJoinGiveaway();
 	const loggedUser = isLogged();
 	const { id: userId } = loggedUser || {};
 
-	useEffect(() => {
-		setCart(getCartFromStorage());
-	}, []);
-
 	const handleRemoveItem = (giveawayId: string) => {
-		const updatedCart = removeItemFromCart(giveawayId);
-		setCart(updatedCart);
+		removeItem(giveawayId);
 	};
 
 	const handleUpdateQuantity = (giveawayId: string, newQuantity: number) => {
-		const updatedCart = updateItemQuantity(giveawayId, newQuantity);
-		setCart(updatedCart);
+		updateItemQuantity(giveawayId, newQuantity);
 	};
 
 	const handleCheckout = async () => {
@@ -33,7 +26,7 @@ export default function ShoppingCart() {
 		try {
 			const joinRequest: JoinGiveawayRequest = {
 				userId: userId!,
-				items: cart.items.map((item) => ({
+				items: items.map((item) => ({
 					giveawayId: item.giveawayId,
 					numEntries: item.entryCount,
 				})),
@@ -42,7 +35,6 @@ export default function ShoppingCart() {
 			await joinGiveawayMutation.mutateAsync(joinRequest);
 
 			clearCart();
-			setCart({ items: [], totalAmount: 0 });
 
 			const toastElement = document.getElementById("checkoutToast");
 			if (toastElement) {
@@ -56,7 +48,7 @@ export default function ShoppingCart() {
 		}
 	};
 
-	if (cart.items.length === 0) {
+	if (items.length === 0) {
 		return (
 			<div className="container mt-4">
 				<div className="row justify-content-center">
@@ -80,12 +72,9 @@ export default function ShoppingCart() {
 		<div className="container mt-4">
 			<div className="row">
 				<div className="col-md-8">
-					<h2 className="mb-4">
-						<i className="bi bi-cart3 me-2"></i>
-						Carrinho de Compras
-					</h2>
+					<h2 className="mb-4">Carrinho de Compras</h2>
 
-					{cart.items.map((item) => (
+					{items.map((item) => (
 						<div key={item.giveawayId} className="card bg-dark border-secondary mb-3">
 							<div className="card-body">
 								<div className="row align-items-center">
@@ -167,17 +156,17 @@ export default function ShoppingCart() {
 						</div>
 						<div className="card-body">
 							<div className="d-flex justify-content-between mb-2">
-								<span>Items no carrinho:</span>
-								<span>{cart.items.reduce((total, item) => total + item.entryCount, 0)}</span>
+								<span>Sorteios no carrinho:</span>
+								<span>{items.length}</span>
 							</div>
 							<div className="d-flex justify-content-between mb-3">
-								<span>Sorteios:</span>
-								<span>{cart.items.length}</span>
+								<span>Total de entradas:</span>
+								<span>{items.reduce((total, item) => total + item.entryCount, 0)}</span>
 							</div>
 							<hr />
 							<div className="d-flex justify-content-between mb-3">
 								<strong>Total:</strong>
-								<strong>R$ {cart.totalAmount.toFixed(2)}</strong>
+								<strong>R$ {totalAmount.toFixed(2)}</strong>
 							</div>
 
 							<button className="btn btn-success w-100" onClick={handleCheckout} disabled={isProcessing}>

@@ -5,7 +5,7 @@ import { isLogged } from "../lib/isLogged";
 import Toast from "bootstrap/js/dist/toast";
 import { createJoinGiveawaySchemaWithAvailableEntries, type JoinGiveawayFormData } from "../schemas/giveaway";
 import { useFormValidation } from "../hooks/useFormValidation";
-import { addItemToCart } from "../utils/cart";
+import { useCart } from "../hooks/useCart";
 import type { CartItem } from "../interfaces/CartItem";
 
 export default function Giveaway() {
@@ -18,6 +18,7 @@ export default function Giveaway() {
 	const [serverError, setServerError] = useState("");
 	const loggedUser = isLogged();
 	const { id: userId } = loggedUser || {};
+	const { addItem } = useCart();
 
 	const { data: giveaway, isLoading, error: fetchError } = useFindGiveaway(id || "");
 
@@ -48,7 +49,7 @@ export default function Giveaway() {
 				totalPrice: data.entryCount * giveaway.entryPrice,
 			};
 
-			addItemToCart(cartItem);
+			addItem(cartItem);
 
 			const toastElement = document.getElementById("addToCartToast");
 			if (toastElement) {
@@ -78,7 +79,7 @@ export default function Giveaway() {
 				totalPrice: data.entryCount * giveaway.entryPrice,
 			};
 
-			addItemToCart(cartItem);
+			addItem(cartItem);
 
 			const toastElement = document.getElementById("participateToast");
 			if (toastElement) {

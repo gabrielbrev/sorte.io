@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useFindAllGiveaways } from "../hooks/giveaway/useFindAllGiveaways";
+import { GiveawayCard } from "../components/GiveawayCard";
 
 export default function Home() {
 	const [searchParams] = useSearchParams();
@@ -46,32 +47,14 @@ export default function Home() {
 			<h1 className="mb-4">Sorteios Ativos</h1>
 			<div className="d-flex flex-column align-items-center">
 				{paginatedGiveaways.map((g) => (
-					<div
-						key={g.id}
-						className="card mb-3 bg-dark text-light border-secondary"
-						style={{ width: "600px" }}
-					>
-						<img
-							src={g.imageUrl}
-							className="card-img-top img-fluid object-fit-cover"
-							style={{ height: "300px" }}
-							alt={g.title}
-						/>
-						<div className="card-body">
-							<h5 className="card-title">{g.title}</h5>
-							<p className="card-text">{g.description}</p>
-							<div className="d-flex justify-content-center">
-								<Link to={`/giveaway?id=${g.id}`} className="btn btn-primary">
-									Participar Agora
-								</Link>
-							</div>
-							<p className="card-text">
-								<small className="text-secondary">
-									Criado em {new Date(g.createdAt).toLocaleDateString("pt-BR")}
-								</small>
-							</p>
-						</div>
-					</div>
+					<GiveawayCard
+						id={g.id}
+						imageUrl={g.imageUrl}
+						title={g.title}
+						description={g.description}
+						entryPrice={g.entryPrice}
+						createdAt={g.createdAt}
+					/>
 				))}
 			</div>
 
@@ -85,7 +68,7 @@ export default function Home() {
 					>
 						<li className={`page-item ${page === 0 ? "disabled" : ""}`}>
 							<Link className="page-link" to={`?page=${page - 1}`} aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
+								<i className="bi bi-chevron-left"></i>
 							</Link>
 						</li>
 
@@ -99,7 +82,7 @@ export default function Home() {
 
 						<li className={`page-item ${page === totalPages - 1 ? "disabled" : ""}`}>
 							<Link className="page-link" to={`?page=${page + 1}`} aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
+								<i className="bi bi-chevron-right"></i>
 							</Link>
 						</li>
 					</ul>

@@ -132,7 +132,10 @@ export default function Register() {
 									Cadastrando...
 								</>
 							) : (
-								"Cadastrar"
+								<>
+									<i className="bi bi-person-plus me-2"></i>
+									Cadastrar
+								</>
 							)}
 						</button>
 						<div className="text-center mt-3">

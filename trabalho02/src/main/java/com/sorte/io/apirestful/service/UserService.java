@@ -1,6 +1,8 @@
 package com.sorte.io.apirestful.service;
 
+import com.sorte.io.apirestful.model.Giveaway;
 import com.sorte.io.apirestful.model.User;
+import com.sorte.io.apirestful.repository.GiveawayRepository;
 import com.sorte.io.apirestful.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    GiveawayRepository giveawayRepository;
 
     public void createUser(User user) {
         userRepository.save(user);

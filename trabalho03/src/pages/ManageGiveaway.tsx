@@ -502,7 +502,10 @@ export default function ManageGiveaway() {
 
 										{hasWinner && (
 											<div className="mb-3">
-												<h6>🎉 Vencedor:</h6>
+												<h6>
+													<i className="bi bi-trophy-fill text-warning me-2"></i>
+													Vencedor:
+												</h6>
 												<div className="alert alert-success">
 													<strong>{giveaway.winner?.name}</strong>
 													<br />

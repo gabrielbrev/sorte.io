@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import CreateGiveaway from "../pages/CreateGiveaway";
 import ManageGiveaway from "../pages/ManageGiveaway";
 import ShoppingCart from "../pages/ShoppingCart";
+import Favorites from "../pages/Favorites";
 import { PrivateRoutes } from "./PrivateRoutes";
 
 const router = createBrowserRouter([
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
 			{ path: "create-giveaway", element: <CreateGiveaway /> },
 			{ path: "manage-giveaway", element: <ManageGiveaway /> },
 			{ path: "cart", element: <ShoppingCart /> },
+			{ path: "favorites", element: <Favorites /> },
 		],
 	},
 ]);

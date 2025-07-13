@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { isLogged } from "../lib/isLogged";
-import { getCartItemCount } from "../utils/cart";
+import { useCart } from "../hooks/useCart";
 
 export function NavBar() {
 	const location = useLocation();
-	const [cartItemCount, setCartItemCount] = useState(0);
+	const { itemCount } = useCart();
 
 	const pages = [
 		{ href: "/", name: "Início" },
@@ -18,35 +18,6 @@ export function NavBar() {
 	function isActive(href: string) {
 		return location.pathname === href ? "active" : "";
 	}
-
-	useEffect(() => {
-		const updateCartCount = () => {
-			setCartItemCount(getCartItemCount());
-		};
-
-		updateCartCount();
-
-		const handleStorageChange = (e: StorageEvent) => {
-			if (e.key === "sorteio_cart") {
-				updateCartCount();
-			}
-		};
-
-		const handleCartUpdate = () => {
-			updateCartCount();
-		};
-
-		window.addEventListener("storage", handleStorageChange);
-		window.addEventListener("cartUpdated", handleCartUpdate);
-
-		const intervalId = setInterval(updateCartCount, 500);
-
-		return () => {
-			window.removeEventListener("storage", handleStorageChange);
-			window.removeEventListener("cartUpdated", handleCartUpdate);
-			clearInterval(intervalId);
-		};
-	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -75,7 +46,7 @@ export function NavBar() {
 			<div className="container">
 				<Link className="navbar-brand text-light" to="/">
 					<div className="d-flex flex-row align-items-center justify-content-center">
-						<img src="../../public/icon.png" alt="sorte.io" height={30} />
+						<img src="/icon.png" alt="sorte.io" height={30} />
 						<span>Sorte.io</span>
 					</div>
 				</Link>
@@ -91,17 +62,31 @@ export function NavBar() {
 								</Link>
 							</li>
 						))}
+						{isLogged() && (
+							<li className="nav-item">
+								<Link className={`nav-link ${isActive("/favorites")}`} to="/favorites">
+									<span className="d-lg-none">Favoritos</span>
+									<i className="bi bi-heart fs-5 d-none d-lg-inline"></i>
+								</Link>
+							</li>
+						)}
 						<li className="nav-item">
 							<Link className={`nav-link position-relative ${isActive("/cart")}`} to="/cart">
-								<i className="bi bi-cart3 fs-5"></i>
-								{cartItemCount > 0 && (
-									<span
-										className="position-absolute top-3 start-100 translate-middle badge rounded-pill bg-danger"
-										style={{ fontSize: "0.75rem" }}
-									>
-										{cartItemCount > 99 ? "99+" : cartItemCount}
-									</span>
-								)}
+								<span className="d-lg-none">
+									Carrinho
+									{itemCount > 0 && ` (${itemCount > 99 ? "99+" : itemCount})`}
+								</span>
+								<span className="position-relative d-none d-lg-inline">
+									<i className="bi bi-cart3 fs-5"></i>
+									{itemCount > 0 && (
+										<span
+											className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-flex align-items-center justify-content-center"
+											style={{ fontSize: "0.65rem", minWidth: "1rem", height: "1rem" }}
+										>
+											{itemCount > 99 ? "99+" : itemCount}
+										</span>
+									)}
+								</span>
 							</Link>
 						</li>
 					</ul>

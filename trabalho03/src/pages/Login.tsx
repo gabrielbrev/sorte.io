@@ -99,7 +99,10 @@ export default function Login() {
 									Entrando...
 								</>
 							) : (
-								"Entrar"
+								<>
+									<i className="bi bi-box-arrow-in-right me-2"></i>
+									Entrar
+								</>
 							)}
 						</button>
 						<div className="text-center mt-3">
