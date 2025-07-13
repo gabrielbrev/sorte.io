@@ -34,7 +34,7 @@ export const useCart = () => {
 			title: string,
 			imageUrl: string,
 			entryPrice: number,
-			quantity: number = 1
+			quantity: number = 1,
 		) => {
 			const cartItem: CartItem = {
 				giveawayId,

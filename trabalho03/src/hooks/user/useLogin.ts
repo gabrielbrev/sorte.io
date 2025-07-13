@@ -34,5 +34,7 @@ async function handleLogin(payload: LoginRequest) {
 }
 
 export const useLogin = () => {
-	return useMutation({ mutationFn: (payload: LoginRequest) => handleLogin(payload) });
+	return useMutation({
+		mutationFn: (payload: LoginRequest) => handleLogin(payload),
+	});
 };

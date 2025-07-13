@@ -28,5 +28,7 @@ async function handleCreateGiveaway(payload: CreateGiveawayRequest) {
 }
 
 export const useCreateGiveaway = () => {
-	return useMutation({ mutationFn: (payload: CreateGiveawayRequest) => handleCreateGiveaway(payload) });
+	return useMutation({
+		mutationFn: (payload: CreateGiveawayRequest) => handleCreateGiveaway(payload),
+	});
 };

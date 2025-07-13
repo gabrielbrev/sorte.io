@@ -27,7 +27,10 @@ export function useFormValidation<T extends Record<string, any>>({ schema, onSub
 				});
 				return { isValid: false, errors: formattedErrors };
 			}
-			return { isValid: false, errors: { general: "Erro de validação desconhecido" } };
+			return {
+				isValid: false,
+				errors: { general: "Erro de validação desconhecido" },
+			};
 		}
 	};
 

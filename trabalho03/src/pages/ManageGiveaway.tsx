@@ -559,7 +559,7 @@ export default function ManageGiveaway() {
 												className="btn btn-outline-info"
 												onClick={() => {
 													navigator.clipboard.writeText(
-														`${window.location.origin}/giveaway?id=${giveaway.id}`
+														`${window.location.origin}/giveaway?id=${giveaway.id}`,
 													);
 													// TODO: Mostrar toast de sucesso
 												}}

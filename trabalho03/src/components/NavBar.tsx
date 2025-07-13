@@ -81,7 +81,11 @@ export function NavBar() {
 									{itemCount > 0 && (
 										<span
 											className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-flex align-items-center justify-content-center"
-											style={{ fontSize: "0.65rem", minWidth: "1rem", height: "1rem" }}
+											style={{
+												fontSize: "0.65rem",
+												minWidth: "1rem",
+												height: "1rem",
+											}}
 										>
 											{itemCount > 99 ? "99+" : itemCount}
 										</span>

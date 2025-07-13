@@ -83,7 +83,11 @@ export default function ShoppingCart() {
 											src={item.imageUrl}
 											alt={item.title}
 											className="img-fluid rounded"
-											style={{ maxHeight: "80px", objectFit: "cover", width: "100%" }}
+											style={{
+												maxHeight: "80px",
+												objectFit: "cover",
+												width: "100%",
+											}}
 										/>
 									</div>
 									<div className="col-md-4">

@@ -58,7 +58,11 @@ export default function Favorites() {
 												src={favorite.imageUrl}
 												alt={favorite.title}
 												className="img-fluid rounded"
-												style={{ maxHeight: "120px", objectFit: "cover", width: "100%" }}
+												style={{
+													maxHeight: "120px",
+													objectFit: "cover",
+													width: "100%",
+												}}
 											/>
 										</div>
 										<div className="col-md-4">
@@ -118,7 +122,7 @@ export default function Favorites() {
 																favorite.giveawayId,
 																favorite.title,
 																favorite.imageUrl,
-																favorite.entryPrice
+																favorite.entryPrice,
 															)
 														}
 													>

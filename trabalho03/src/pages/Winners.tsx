@@ -45,7 +45,11 @@ export default function Winners() {
 									<img
 										src={g.imageUrl}
 										className="img-fluid rounded"
-										style={{ width: "100%", height: "100%", objectFit: "cover" }}
+										style={{
+											width: "100%",
+											height: "100%",
+											objectFit: "cover",
+										}}
 										alt={g.title}
 									/>
 								</td>

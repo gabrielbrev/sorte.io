@@ -21,5 +21,7 @@ async function handleDeleteGiveaway(payload: DeleteGiveawayRequest) {
 }
 
 export const useDeleteGiveaway = () => {
-	return useMutation({ mutationFn: (payload: DeleteGiveawayRequest) => handleDeleteGiveaway(payload) });
+	return useMutation({
+		mutationFn: (payload: DeleteGiveawayRequest) => handleDeleteGiveaway(payload),
+	});
 };

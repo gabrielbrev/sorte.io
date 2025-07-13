@@ -23,5 +23,7 @@ async function handleRegister(payload: RegisterRequest) {
 }
 
 export const useRegister = () => {
-	return useMutation({ mutationFn: (payload: RegisterRequest) => handleRegister(payload) });
+	return useMutation({
+		mutationFn: (payload: RegisterRequest) => handleRegister(payload),
+	});
 };

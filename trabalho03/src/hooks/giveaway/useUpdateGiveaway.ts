@@ -27,5 +27,7 @@ async function handleUpdateGiveaway(payload: UpdateGiveawayRequest) {
 }
 
 export const useUpdateGiveaway = () => {
-	return useMutation({ mutationFn: (payload: UpdateGiveawayRequest) => handleUpdateGiveaway(payload) });
+	return useMutation({
+		mutationFn: (payload: UpdateGiveawayRequest) => handleUpdateGiveaway(payload),
+	});
 };

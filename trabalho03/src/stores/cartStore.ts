@@ -19,7 +19,7 @@ export const useCartStore = create<CartState>()(
 			addItem: (item: CartItem) => {
 				set((state) => {
 					const existingItemIndex = state.items.findIndex(
-						(cartItem) => cartItem.giveawayId === item.giveawayId
+						(cartItem) => cartItem.giveawayId === item.giveawayId,
 					);
 
 					let newItems: CartItem[];
@@ -31,8 +31,8 @@ export const useCartStore = create<CartState>()(
 										...cartItem,
 										entryCount: cartItem.entryCount + item.entryCount,
 										totalPrice: cartItem.totalPrice + item.totalPrice,
-								  }
-								: cartItem
+									}
+								: cartItem,
 						);
 					} else {
 						newItems = [...state.items, item];
@@ -72,8 +72,8 @@ export const useCartStore = create<CartState>()(
 										...item,
 										entryCount: newEntryCount,
 										totalPrice: newEntryCount * item.entryPrice,
-								  }
-								: item
+									}
+								: item,
 						);
 					}
 
@@ -101,6 +101,6 @@ export const useCartStore = create<CartState>()(
 		{
 			name: "sorteio-cart-storage",
 			version: 1,
-		}
-	)
+		},
+	),
 );

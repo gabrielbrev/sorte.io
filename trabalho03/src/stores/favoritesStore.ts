@@ -66,8 +66,8 @@ const createFavoritesStore = (userId?: string) => {
 			{
 				name: storageKey,
 				version: 1,
-			}
-		)
+			},
+		),
 	);
 };
 

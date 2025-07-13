@@ -20,8 +20,8 @@ export default function Error() {
 									{isRouteErrorResponse(error)
 										? "Página requisitada inválida"
 										: error && typeof error === "object" && "message" in error
-										? (error as Error).message
-										: "Erro desconhecido"}
+											? (error as Error).message
+											: "Erro desconhecido"}
 								</small>
 							</div>
 							<Link to="/" className="btn btn-primary">
