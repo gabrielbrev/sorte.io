@@ -60,7 +60,7 @@ export default function Home() {
 		);
 	}
 
-	const allGiveaways = data?.pages.flatMap((page) => page.content) || [];
+	const allGiveaways = data?.pages.flatMap((page) => page.items) || [];
 
 	return (
 		<>
@@ -68,7 +68,7 @@ export default function Home() {
 				<h1>Sorteios Ativos</h1>
 				{data?.pages[0] && (
 					<small className="text-muted">
-						{allGiveaways.length} de {data.pages[0].totalElements} sorteios
+						{allGiveaways.length} de {data.pages[0].totalItems} sorteios
 					</small>
 				)}
 			</div>

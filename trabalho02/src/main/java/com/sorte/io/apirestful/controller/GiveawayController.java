@@ -2,6 +2,7 @@ package com.sorte.io.apirestful.controller;
 
 import com.sorte.io.apirestful.dto.request.JoinGiveawaysRequest;
 import com.sorte.io.apirestful.dto.response.JoinGiveawaysResponse;
+import com.sorte.io.apirestful.dto.response.PageResponse;
 import com.sorte.io.apirestful.model.Giveaway;
 import com.sorte.io.apirestful.service.GiveawayService;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class GiveawayController {
     }
 
     @GetMapping("/find-active")
-    public Page<Giveaway> findActiveGiveaways(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public PageResponse<Giveaway> findActiveGiveaways(@RequestParam("page") int page, @RequestParam("size") int size) {
         return giveawayService.findActiveGiveaways(page, size);
     }
 

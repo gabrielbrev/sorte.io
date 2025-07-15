@@ -2,6 +2,7 @@ package com.sorte.io.apirestful.service;
 
 import com.sorte.io.apirestful.dto.request.JoinGiveawaysRequest;
 import com.sorte.io.apirestful.dto.response.JoinGiveawaysResponse;
+import com.sorte.io.apirestful.dto.response.PageResponse;
 import com.sorte.io.apirestful.model.Entry;
 import com.sorte.io.apirestful.model.Giveaway;
 import com.sorte.io.apirestful.model.User;
@@ -34,9 +35,15 @@ public class GiveawayService {
         return giveawayRepository.findAll();
     }
 
-    public Page<Giveaway> findActiveGiveaways(int page, int size) {
+    public PageResponse<Giveaway> findActiveGiveaways(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return giveawayRepository.findActiveGiveaways(pageable);
+        Page<Giveaway> result = giveawayRepository.findActiveGiveaways(pageable);
+        return new PageResponse<Giveaway>(
+            result.getContent(),
+            result.getTotalElements(),
+            result.getTotalPages(),
+            result.getNumber()
+        );
     }
 
     public Giveaway findById(String id) {

@@ -2,32 +2,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import type { Giveaway } from "../../interfaces/Giveaway";
 
 interface PaginatedResponse {
-	content: Giveaway[];
-	pageable: {
-		pageNumber: number;
-		pageSize: number;
-		sort: {
-			empty: boolean;
-			sorted: boolean;
-			unsorted: boolean;
-		};
-		offset: number;
-		paged: boolean;
-		unpaged: boolean;
-	};
-	last: boolean;
-	totalElements: number;
+	items: Giveaway[];
+	totalItems: number;
 	totalPages: number;
-	number: number;
-	sort: {
-		empty: boolean;
-		sorted: boolean;
-		unsorted: boolean;
-	};
-	first: boolean;
-	size: number;
-	numberOfElements: number;
-	empty: boolean;
+	currentPage: number;
 }
 
 async function handleFindActiveGiveaways(page: number, size: number = 3): Promise<PaginatedResponse> {
@@ -54,8 +32,8 @@ export const useFindActiveGiveaways = (pageSize: number = 3) => {
 		queryKey: ["active-giveaways", pageSize],
 		queryFn: ({ pageParam = 0 }) => handleFindActiveGiveaways(pageParam as number, pageSize),
 		getNextPageParam: (lastPage: PaginatedResponse) => {
-			if (lastPage.last) return undefined;
-			return lastPage.number + 1;
+			if (lastPage.currentPage >= lastPage.totalPages - 1) return undefined;
+			return lastPage.currentPage + 1;
 		},
 		initialPageParam: 0,
 		staleTime: 5 * 60 * 1000,
