@@ -1,11 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFindUser } from "../hooks/user/useFindUser";
 import { isLogged } from "../lib/isLogged";
+import { logout } from "../lib/logout";
 
 export default function Profile() {
+	const navigate = useNavigate();
 	const loggedUser = isLogged();
 	const { id: userId } = loggedUser || {};
 	const { data: user, isLoading, error } = useFindUser(userId || "");
+
+	function handleLogout() {
+		logout();
+		navigate("/");
+	}
 
 	if (isLoading) {
 		return (
@@ -19,9 +26,21 @@ export default function Profile() {
 
 	if (error || !user) {
 		return (
-			<div className="alert alert-danger" role="alert">
-				Erro ao carregar perfil: {error?.message || "Usuário não encontrado"}
-			</div>
+			<>
+				<div className="d-flex justify-content-between align-items-center mb-4">
+					<h1>Meu Perfil</h1>
+					<button 
+						className="btn btn-outline-danger"
+						onClick={handleLogout}
+					>
+						<i className="bi bi-box-arrow-right me-2"></i>
+						Logout
+					</button>
+				</div>
+				<div className="alert alert-danger" role="alert">
+					Erro ao carregar perfil: {error?.message || "Usuário não encontrado"}
+				</div>
+			</>
 		);
 	}
 
@@ -29,7 +48,16 @@ export default function Profile() {
 
 	return (
 		<>
-			<h1 className="mb-4">Meu Perfil</h1>
+			<div className="d-flex justify-content-between align-items-center mb-4">
+				<h1>Meu Perfil</h1>
+				<button 
+					className="btn btn-outline-danger"
+					onClick={handleLogout}
+				>
+					<i className="bi bi-box-arrow-right me-2"></i>
+					Logout
+				</button>
+			</div>
 
 			<div className="card mb-4 text-light bg-dark border-secondary">
 				<div className="card-body">
