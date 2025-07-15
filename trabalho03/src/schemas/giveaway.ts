@@ -27,8 +27,7 @@ export const createGiveawaySchema = z.object({
 		})
 		.int("Número de entradas deve ser um número inteiro")
 		.positive("Número de entradas deve ser maior que zero")
-		.min(1, "Mínimo de 1 entrada")
-		.max(10000, "Máximo de 10.000 entradas"),
+		.min(1, "Mínimo de 1 entrada"),
 	imageUrl: z
 		.string()
 		.min(1, "URL da imagem é obrigatória")

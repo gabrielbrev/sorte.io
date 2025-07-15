@@ -18,7 +18,7 @@ export default function Giveaway() {
 	const [serverError, setServerError] = useState("");
 	const loggedUser = isLogged();
 	const { id: userId } = loggedUser || {};
-	const { addItem } = useCart();
+	const { addItem, updateItemQuantity, isItemInCart, getItemQuantity } = useCart();
 
 	const { data: giveaway, isLoading, error: fetchError } = useFindGiveaway(id || "");
 
@@ -27,6 +27,8 @@ export default function Giveaway() {
 	const availableEntries = totalEntries - soldEntries;
 	const hasWinner = !!giveaway?.winner;
 	const isCurrentUserWinner = hasWinner && userId && giveaway?.winner?.id === userId;
+	const isInCart = giveaway ? isItemInCart(giveaway.id) : false;
+	const cartQuantity = giveaway ? getItemQuantity(giveaway.id) : 0;
 
 	// Cria um schema dinâmico com base nas entradas disponíveis
 	const joinSchema = createJoinGiveawaySchemaWithAvailableEntries(availableEntries);
@@ -40,20 +42,33 @@ export default function Giveaway() {
 		}
 
 		try {
-			const cartItem: CartItem = {
-				giveawayId: giveaway.id,
-				title: giveaway.title,
-				imageUrl: giveaway.imageUrl,
-				entryPrice: giveaway.entryPrice,
-				entryCount: data.entryCount,
-				totalPrice: data.entryCount * giveaway.entryPrice,
-			};
-
-			addItem(cartItem);
+			if (isItemInCart(giveaway.id)) {
+				// Se o item já está no carrinho, atualiza a quantidade
+				const currentQuantity = getItemQuantity(giveaway.id);
+				updateItemQuantity(giveaway.id, currentQuantity + data.entryCount);
+			} else {
+				// Se o item não está no carrinho, adiciona novo
+				const cartItem: CartItem = {
+					giveawayId: giveaway.id,
+					title: giveaway.title,
+					imageUrl: giveaway.imageUrl,
+					entryPrice: giveaway.entryPrice,
+					entryCount: data.entryCount,
+					totalPrice: data.entryCount * giveaway.entryPrice,
+				};
+				addItem(cartItem);
+			}
 
 			const toastElement = document.getElementById("addToCartToast");
 			if (toastElement) {
 				const toast = Toast.getOrCreateInstance(toastElement);
+				// Atualizar mensagem do toast baseado se já estava no carrinho
+				const toastBody = toastElement.querySelector(".toast-body p");
+				if (toastBody) {
+					toastBody.textContent = isItemInCart(giveaway.id)
+						? "Quantidade atualizada no carrinho!"
+						: "Item adicionado ao carrinho com sucesso!";
+				}
 				toast.show();
 			}
 		} catch (err: any) {
@@ -70,16 +85,22 @@ export default function Giveaway() {
 		}
 
 		try {
-			const cartItem: CartItem = {
-				giveawayId: giveaway.id,
-				title: giveaway.title,
-				imageUrl: giveaway.imageUrl,
-				entryPrice: giveaway.entryPrice,
-				entryCount: data.entryCount,
-				totalPrice: data.entryCount * giveaway.entryPrice,
-			};
-
-			addItem(cartItem);
+			if (isItemInCart(giveaway.id)) {
+				// Se o item já está no carrinho, atualiza a quantidade
+				const currentQuantity = getItemQuantity(giveaway.id);
+				updateItemQuantity(giveaway.id, currentQuantity + data.entryCount);
+			} else {
+				// Se o item não está no carrinho, adiciona novo
+				const cartItem: CartItem = {
+					giveawayId: giveaway.id,
+					title: giveaway.title,
+					imageUrl: giveaway.imageUrl,
+					entryPrice: giveaway.entryPrice,
+					entryCount: data.entryCount,
+					totalPrice: data.entryCount * giveaway.entryPrice,
+				};
+				addItem(cartItem);
+			}
 
 			const toastElement = document.getElementById("participateToast");
 			if (toastElement) {
@@ -128,7 +149,25 @@ export default function Giveaway() {
 		const { name, value } = e.target;
 		const numValue = Number(value);
 		setFormData((prev) => ({ ...prev, [name]: numValue }));
-		setServerError(""); // Limpa erro do servidor quando o usuário digita
+		setServerError("");
+	};
+
+	const incrementQuantity = () => {
+		if (formData.entryCount < availableEntries) {
+			setFormData((prev) => ({ ...prev, entryCount: prev.entryCount + 1 }));
+			setServerError("");
+		}
+	};
+
+	const decrementQuantity = () => {
+		if (formData.entryCount > 1) {
+			setFormData((prev) => ({ ...prev, entryCount: prev.entryCount - 1 }));
+			setServerError("");
+		}
+	};
+
+	const handleGoBack = () => {
+		navigate(-1);
 	};
 
 	const onSubmit = (e: React.FormEvent) => {
@@ -143,8 +182,10 @@ export default function Giveaway() {
 
 	return (
 		<>
-			<div className="d-flex justify-content-end">
-				<Link className="btn-close btn-close-white" aria-label="Close" to="/" />
+			<div className="d-flex justify-content-start">
+				<button className="btn btn-link text-light p-0 mb-3" onClick={handleGoBack} aria-label="Voltar">
+					<i className="bi bi-chevron-left fs-4"></i>
+				</button>
 			</div>
 			<div className="row">
 				<div className="container col-md-6" style={{ width: "50%" }}>
@@ -210,43 +251,90 @@ export default function Giveaway() {
 						<label htmlFor="entryCount" className="form-label">
 							Quantidade de entradas
 						</label>
-						<input
-							type="number"
-							className={`form-control mb-3 bg-dark text-light border-secondary ${
-								errors.entryCount ? "is-invalid" : ""
-							}`}
-							id="entryCount"
-							name="entryCount"
-							min="1"
-							max={availableEntries}
-							value={formData.entryCount}
-							onChange={handleInputChange}
-							disabled={hasWinner}
-							required
-						/>
+						<div className="input-group mb-3">
+							<button
+								type="button"
+								className="btn btn-outline-secondary"
+								onClick={decrementQuantity}
+								disabled={formData.entryCount <= 1 || hasWinner}
+							>
+								<i className="bi bi-dash"></i>
+							</button>
+							<input
+								type="number"
+								className={`form-control bg-dark text-light border-secondary text-center ${
+									errors.entryCount ? "is-invalid" : ""
+								}`}
+								id="entryCount"
+								name="entryCount"
+								min="1"
+								max={availableEntries}
+								value={formData.entryCount}
+								onChange={handleInputChange}
+								disabled={hasWinner}
+								required
+							/>
+							<button
+								type="button"
+								className="btn btn-outline-secondary"
+								onClick={incrementQuantity}
+								disabled={formData.entryCount >= availableEntries || hasWinner}
+							>
+								<i className="bi bi-plus"></i>
+							</button>
+						</div>
 						{errors.entryCount && <div className="invalid-feedback d-block mb-3">{errors.entryCount}</div>}
 
 						{serverError && <div className="alert alert-danger py-2 mb-3">{serverError}</div>}
 
-						<div className="d-grid gap-2 d-md-flex justify-content-md-start">
-							<button
-								type="button"
-								className="btn btn-outline-primary"
-								onClick={onAddToCart}
-								disabled={availableEntries === 0 || hasWinner}
-							>
-								<i className="bi bi-cart-plus me-2"></i>
-								Adicionar ao Carrinho
-							</button>
+						{isInCart && !hasWinner && (
+							<div className="alert alert-info py-2 mb-3">
+								<i className="bi bi-cart-check me-2"></i>
+								Este item já está no seu carrinho ({cartQuantity}{" "}
+								{cartQuantity === 1 ? "entrada" : "entradas"})
+							</div>
+						)}
 
-							<button
-								type="submit"
-								className="btn btn-primary"
-								disabled={availableEntries === 0 || hasWinner}
-							>
-								<i className="bi bi-lightning-charge me-2"></i>
-								Participar Agora
-							</button>
+						<div className="d-grid gap-2 d-md-flex justify-content-md-start">
+							{isInCart && !hasWinner ? (
+								<>
+									<button type="button" className="btn btn-success" onClick={() => navigate("/cart")}>
+										<i className="bi bi-cart me-2"></i>
+										Ver Carrinho
+									</button>
+
+									<button
+										type="button"
+										className="btn btn-outline-primary"
+										onClick={onAddToCart}
+										disabled={availableEntries === 0}
+									>
+										<i className="bi bi-plus-circle me-2"></i>
+										Adicionar Mais
+									</button>
+								</>
+							) : (
+								<>
+									<button
+										type="button"
+										className="btn btn-outline-primary"
+										onClick={onAddToCart}
+										disabled={availableEntries === 0 || hasWinner}
+									>
+										<i className="bi bi-cart-plus me-2"></i>
+										Adicionar ao Carrinho
+									</button>
+
+									<button
+										type="submit"
+										className="btn btn-primary"
+										disabled={availableEntries === 0 || hasWinner}
+									>
+										<i className="bi bi-lightning-charge me-2"></i>
+										Participar Agora
+									</button>
+								</>
+							)}
 						</div>
 
 						{!userId && !hasWinner && (

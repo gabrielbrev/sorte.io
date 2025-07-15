@@ -24,9 +24,8 @@ export default function Winners() {
 	return (
 		<div className="container-fluid px-4">
 			{/* Header Section */}
-			<div className="text-center mb-5">
-				<h1 className="display-4 fw-bold text-warning mb-3">🏆 Ganhadores Recentes</h1>
-				<p className="lead text-light opacity-75">Confira os sortudos que levaram os melhores prêmios!</p>
+			<div className="d-flex justify-content-between align-items-center mb-4">
+				<h1>Ganhadores</h1>
 			</div>
 
 			{giveaways && giveaways.length > 0 ? (
@@ -75,22 +74,21 @@ export default function Winners() {
 					))}
 				</div>
 			) : (
-				<div className="text-center py-5">
-					<div className="mb-4">
-						<i className="bi bi-search text-warning" style={{ fontSize: "4rem" }}></i>
-					</div>
-					<h3 className="text-light mb-3">Nenhum ganhador ainda</h3>
-					<p className="text-light opacity-75 mb-4">
-						Os sorteios ainda não foram finalizados ou não há ganhadores para exibir.
-					</p>
-					<div
-						className="alert alert-info border-0 bg-gradient"
-						style={{
-							background: "linear-gradient(45deg, #17a2b8, #6610f2)",
-						}}
-					>
-						<i className="bi bi-info-circle me-2"></i>
-						Volte mais tarde para conferir os próximos ganhadores!
+				<div className="container mt-4">
+					<div className="row justify-content-center">
+						<div className="col-md-8">
+							<div className="text-center">
+								<i className="bi bi-trophy display-1 text-muted mb-3"></i>
+								<h2>Nenhum ganhador ainda</h2>
+								<p className="text-muted mb-4">
+									Os sorteios ainda não foram finalizados ou não há ganhadores para exibir.
+								</p>
+								<div className="alert alert-info">
+									<i className="bi bi-info-circle me-2"></i>
+									Volte mais tarde para conferir os próximos ganhadores!
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			)}

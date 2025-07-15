@@ -305,7 +305,7 @@ export default function ManageGiveaway() {
 													<div className="col-md-6">
 														<div className="mb-3">
 															<label htmlFor="numEntries" className="form-label">
-																Total de entradas * (máx. 10.000)
+																Total de entradas *
 																{soldEntries > 0 && (
 																	<small className="text-muted">
 																		{" "}
@@ -316,7 +316,6 @@ export default function ManageGiveaway() {
 															<input
 																type="number"
 																min={soldEntries}
-																max="10000"
 																className={`form-control bg-dark text-light border-secondary ${
 																	errors.numEntries ? "is-invalid" : ""
 																}`}
@@ -555,18 +554,6 @@ export default function ManageGiveaway() {
 												<i className="bi bi-eye me-2"></i>
 												Ver Página Pública
 											</Link>
-											<button
-												className="btn btn-outline-info"
-												onClick={() => {
-													navigator.clipboard.writeText(
-														`${window.location.origin}/giveaway?id=${giveaway.id}`,
-													);
-													// TODO: Mostrar toast de sucesso
-												}}
-											>
-												<i className="bi bi-clipboard me-2"></i>
-												Copiar Link do Sorteio
-											</button>
 										</div>
 									</div>
 								</div>

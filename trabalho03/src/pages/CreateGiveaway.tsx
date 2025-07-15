@@ -134,12 +134,11 @@ export default function CreateGiveaway() {
 									<div className="col-md-6">
 										<div className="mb-3">
 											<label htmlFor="numEntries" className="form-label">
-												Número de Entradas * (máx. 10.000)
+												Número de Entradas *
 											</label>
 											<input
 												type="number"
 												min="1"
-												max="10000"
 												className={`form-control bg-dark text-light border-secondary ${
 													errors.numEntries ? "is-invalid" : ""
 												}`}
