@@ -18,6 +18,7 @@ public class UserService {
     GiveawayRepository giveawayRepository;
 
     public void createUser(User user) {
+        System.out.println(user);
         userRepository.save(user);
     }
 
