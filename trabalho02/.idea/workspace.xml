@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d8008080-6faf-44eb-8bc0-070d662ff83d" name="Changes" comment="v1">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/ApirestfulSorteIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/controller/GiveawayController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/dto/request/AuthRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/dto/request/JoinGiveawaysRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/dto/response/AuthResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/dto/response/JoinGiveawaysResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/dto/response/PageResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/exception/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/model/Entry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/model/Giveaway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/repository/EntryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/repository/GiveawayRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/service/GiveawayService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sorte/io/apirestful/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/sorte/io/apirestful/ApirestfulSorteIOTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/.prettierignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/.prettierrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/public/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/components/GiveawayCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/components/NavBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useCreateGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useDeleteGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useDrawGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useFindActiveGiveaways.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useFindAllGiveaways.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useFindEndedGiveaways.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useFindGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useJoinGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/giveaway/useUpdateGiveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/useCart.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/useFavorites.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/useFormValidation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/user/useFindUser.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/user/useLogin.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/hooks/user/useRegister.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/interfaces/CartItem.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/interfaces/Entry.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/interfaces/Giveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/interfaces/User.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/lib/isLogged.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/lib/logout.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/main.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/CreateGiveaway.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Error.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Favorites.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Giveaway.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Home.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Login.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/ManageGiveaway.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Profile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Register.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/ShoppingCart.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/pages/Winners.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/routes/Layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/routes/PrivateRoutes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/routes/router.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/schemas/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/schemas/giveaway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/stores/cartStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/stores/favoritesStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/utils/cart.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/src/vite-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trabalho03/vite.config.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gabrielbrev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/gabrielbrev/lucky.git&quot;,
+    &quot;accountId&quot;: &quot;88fff9f1-5b6f-45e5-a64d-fe00a0d9961c&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4-sources.jar!/org/springframework/security/web/savedrequest/RequestCacheAwareFilter.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2vOzCvNfHtiLq6lNZ7GPLMdPGTq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApirestfulSorteIO (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ApirestfulSorteIO.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Apirestfulv1Application.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gabrielbrevilieri/Documents/UFF/Disciplinas/Desenvolvimento Web/code/sorte.io/trabalho02&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.carlosribeiro.apirestfulv1.repository" />
+      <recent name="com.carlosribeiro.apirestfulv1.service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sorte.io.apirestful.controller" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="apirestfulv1-parcialmente-completo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="apirestfulv1-parcialmente-completo" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApirestfulSorteIO" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="sorteio-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sorte.io.apirestful.ApirestfulSorteIO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sorte.io.apirestful.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ApirestfulSorteIO" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8008080-6faf-44eb-8bc0-070d662ff83d" name="Changes" comment="" />
+      <created>1744030795162</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744030795162</updated>
+      <workItem from="1744030796932" duration="2836000" />
+      <workItem from="1744200623250" duration="6508000" />
+      <workItem from="1744632618413" duration="7204000" />
+      <workItem from="1745705940001" duration="88000" />
+      <workItem from="1745706157392" duration="1631000" />
+      <workItem from="1745725862531" duration="8875000" />
+      <workItem from="1746453912928" duration="3423000" />
+      <workItem from="1746626574863" duration="3486000" />
+      <workItem from="1746671811441" duration="48000" />
+      <workItem from="1746671910300" duration="30000" />
+      <workItem from="1747051692751" duration="77000" />
+      <workItem from="1747051785997" duration="4434000" />
+      <workItem from="1747085496481" duration="619000" />
+      <workItem from="1747169656643" duration="1224000" />
+      <workItem from="1747224663241" duration="1522000" />
+      <workItem from="1747228874945" duration="1163000" />
+      <workItem from="1747658375521" duration="4753000" />
+      <workItem from="1747830908901" duration="4390000" />
+      <workItem from="1748264141813" duration="258000" />
+      <workItem from="1748264463932" duration="389000" />
+      <workItem from="1748264942782" duration="5417000" />
+      <workItem from="1748434915700" duration="5667000" />
+      <workItem from="1749472393957" duration="353000" />
+      <workItem from="1749473623573" duration="3521000" />
+      <workItem from="1749646556427" duration="3512000" />
+      <workItem from="1750628298865" duration="1361000" />
+      <workItem from="1750857035419" duration="3277000" />
+      <workItem from="1751237480230" duration="6128000" />
+      <workItem from="1751295139510" duration="6668000" />
+      <workItem from="1751302400874" duration="845000" />
+      <workItem from="1751411574869" duration="535000" />
+      <workItem from="1751412121411" duration="206000" />
+      <workItem from="1751412632460" duration="5581000" />
+      <workItem from="1751420600125" duration="5301000" />
+      <workItem from="1751501556407" duration="6622000" />
+      <workItem from="1751819344484" duration="7300000" />
+      <workItem from="1752354563528" duration="13239000" />
+      <workItem from="1752603999287" duration="8448000" />
+    </task>
+    <task id="LOCAL-00001" summary="v1">
+      <option name="closed" value="true" />
+      <created>1750628460949</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750628460949</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix" />
+    <MESSAGE value="v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/apirestfulv1_incompleto$Apirestfulv1Application.ic" NAME="Apirestfulv1Application Coverage Results" MODIFIED="1744205741376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
